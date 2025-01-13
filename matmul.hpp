@@ -1,4 +1,4 @@
 #ifndef MATMUL_HPP
 #define MATMUL_HPP
-void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int colsB,int** result,int choice);
+void matrix_multiplication(double** A,int rowsA,int colsA,double** B,int rowsB,int colsB,double** result,int choice);
 #endif

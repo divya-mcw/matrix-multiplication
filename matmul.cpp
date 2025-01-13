@@ -2,7 +2,7 @@
 #include "matmul.hpp"
 using namespace std;
 
-void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int colsB,int** result,int choice) {
+void matrix_multiplication(double** A,int rowsA,int colsA,double** B,int rowsB,int colsB,double** result,int choice) {
     // result matrix with zero
     for(int i=0;i<rowsA;i++){
         for(int j=0;j<colsB;j++){
@@ -11,7 +11,8 @@ void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int col
     }
 
     switch (choice){
-        case 1: // ijk
+        case 1: 
+            // ijk
             for(int i=0;i<rowsA;i++){
                 for(int j=0;j<colsB;j++){
                     for(int k=0;k<colsA;k++){
@@ -20,7 +21,8 @@ void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int col
                 }
             }
             break;
-        case 2: // ikj
+        case 2: 
+            // ikj
             for(int i=0;i<rowsA;i++){
                 for(int k=0;k<colsA;k++){
                     for(int j=0;j<colsB;j++){
@@ -29,7 +31,8 @@ void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int col
                 }
             }
             break;
-        case 3: // jik
+        case 3: 
+            // jik
             for(int j=0;j<colsB;j++){
                 for(int i=0;i<rowsA;i++){
                     for(int k=0;k<colsA;k++){
@@ -38,7 +41,8 @@ void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int col
                 }
             }
             break;
-        case 4: // jki
+        case 4: 
+            // jki
             for(int j=0;j<colsB;j++){
                 for(int k=0;k<colsA;k++){
                     for(int i=0;i<rowsA;i++){
@@ -47,7 +51,8 @@ void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int col
                 }
             }
             break;
-        case 5: // kij
+        case 5:
+            // kij
             for(int k=0;k<colsA;k++){
                 for(int i=0;i<rowsA;i++){
                     for(int j=0;j<colsB;j++){
@@ -56,7 +61,8 @@ void matrix_multiplication(int** A,int rowsA,int colsA,int** B,int rowsB,int col
                 }
             }
             break;
-        case 6: // kji
+        case 6: 
+            // kji
             for(int k=0;k<colsA;k++){
                 for(int j=0;j<colsB;j++){
                     for(int i=0;i<rowsA;i++){
