@@ -9,15 +9,19 @@ using namespace std;
 
 double** read_matrix_from_file(string filename, int* rows, int* cols){
     ifstream infile(filename);
-    infile>>*rows>>*cols;
-    double** matrix=new double*[*rows];
-    for(int i=0;i<*rows;++i){
-        matrix[i]=new double[*cols];
-        for(int j=0;j<*cols;++j) {
-            infile>>matrix[i][j];
+        if (!(infile>>*rows>>*cols)||*rows<=0||*cols<=0){
+            throw invalid_argument("No matrix dimension found in "+filename);
         }
-    }
-    return matrix;
+        double** matrix=new double*[*rows];
+        for(int i=0;i<*rows;++i){
+            matrix[i]=new double[*cols];
+            for(int j=0;j<*cols;++j) {
+                if (!(infile >> matrix[i][j])) {
+                    throw runtime_error("Insufficient matix data in "+filename);
+                }
+            }
+        }
+        return matrix;
 }
 
 void write_result_to_csv(string test_case,string status,double durations[6]){
@@ -27,6 +31,13 @@ void write_result_to_csv(string test_case,string status,double durations[6]){
         resultsFile<<","<<durations[i];
     }
     resultsFile<<endl;
+}
+
+void deleteMatrix(double** matrix,int rows){
+    for (int i = 0; i < rows; i++) {
+        delete[] matrix[i];
+    }
+    delete[] matrix;
 }
 
 int main(){
@@ -53,34 +64,46 @@ int main(){
     //loop through the test cases
     for(const auto& test_case:test_cases){
         cout<<"Running test case: "<<test_case<<endl;
-
         string A_file=test_case+"/A.txt";
         string B_file=test_case+"/B.txt";
         string C_file=test_case+"/C.txt";
 
         int rowsA,colsA,rowsB,colsB,rowsC,colsC;
+        double durations[6]={0};  //setting empty array for measuring time
+        // initializing the matrix
+        double** A = nullptr;
+        double** B = nullptr;
+        double** C = nullptr;
 
-        double** A=read_matrix_from_file(A_file,&rowsA,&colsA);
-        double** B=read_matrix_from_file(B_file,&rowsB,&colsB);
-        double** C=read_matrix_from_file(C_file,&rowsC,&colsC);
-        
-        //setting empty array for measuring time
-        double durations[6]={0};
-
-        // Check if multiplication is valid
-        if(colsA!=rowsB||rowsA!=rowsC||colsB!=colsC){
-            cout<<"Matrix dimensions mismatch for test case "<< test_case<< endl;
-            string error="dimension mismatch";
+        try
+        {
+            A=read_matrix_from_file(A_file,&rowsA,&colsA);
+            B=read_matrix_from_file(B_file,&rowsB,&colsB);
+            C=read_matrix_from_file(C_file,&rowsC,&colsC);
+        }
+        catch(const exception& e)
+        {   string error=e.what();
+        cout<<"matrix dimension or data error"<< endl;
             write_result_to_csv(test_case,error,durations);
-            // error="matrix dimension mismatch";
-            // Free allocated memory for invalid matrices
+            continue;
+        }
 
-            for(int i=0;i<rowsA;++i)delete[] A[i];
-            for(int i=0;i<rowsB;++i)delete[] B[i];
-            for(int i=0;i<rowsC;++i)delete[] C[i];
-            delete[] A;
-            delete[] B;
-            delete[] C;
+        // Check if multiplication is valid and the C.txt matrix is valid
+        if(colsA!=rowsB || rowsA!=rowsC||colsB!=colsC){
+            cout<<"Matrix dimensions mismatch for test case "<< endl;
+            string error="input dimension mismatch";
+            write_result_to_csv(test_case,error,durations);
+
+            if(rowsA!=rowsC||colsB!=colsC){
+                cout<<"output matrix dimension mismatch"<<endl;
+                string error="output dimension mismatch";
+                write_result_to_csv(test_case,error,durations);
+            }
+
+            // Free allocated memory for invalid matrices
+            deleteMatrix(A,rowsA);
+            deleteMatrix(B,rowsB);
+            deleteMatrix(C,rowsC);
             continue;
         }
 
@@ -90,7 +113,7 @@ int main(){
             result[i]=new double[colsB]();
         }
 
-        // time measuring and multiplying
+        // time measuring in different loops 
         string status="Success";
         for(int choice=1;choice<=6;++choice){
             auto start_time=chrono::high_resolution_clock::now();
@@ -103,7 +126,7 @@ int main(){
             for(int i=0;i<rowsA&&is_success;++i){
                 for(int j=0;j<colsB;++j){
                     // if(result[i][j]!=C[i][j]){
-                    if(result[i][j]-C[i][j]>=std::numeric_limits<double>::epsilon()){
+                    if(result[i][j]-C[i][j]>=numeric_limits<double>::epsilon()){
                         is_success=false;
                         status="Failed";
                         break;
@@ -111,19 +134,14 @@ int main(){
                 }
             }
 
-            // if(status=="Failed")break;  // Stop further testing on failure
+            if(status=="Failed")break;  // Stop further testing on wrong output
         }
         write_result_to_csv(test_case, status, durations);
 
-        for(int i=0;i<rowsA;++i)delete[] A[i];
-        for(int i=0;i<rowsB;++i)delete[] B[i];
-        for(int i=0;i<rowsC;++i)delete[] C[i];
-        for(int i=0;i<rowsA;++i)delete[] result[i];
-        delete[] A;
-        delete[] B;
-        delete[] C;
-        delete[] result;
+        //delete all the matrix finally
+        deleteMatrix(A,rowsA);
+        deleteMatrix(B,rowsB);
+        deleteMatrix(C,rowsC);
+        deleteMatrix(result,rowsA);
     }
-
-    return 0;
 }
