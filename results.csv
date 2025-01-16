@@ -1,10 +1,10 @@
 Test Case,Status,ijk t(ms),ikj t(ms),jik t(ms),jki t(ms),kij t(ms),kji t(ms)
-Unit_test/unit_1,Success,0,0,0,10.593,0,2.209
-Unit_test/unit_2,Success,21.354,6.02,12.033,7.76,5.472,8.019
-Unit_test/unit_3,Success,31.273,17.302,51.452,26.055,18.088,29.455
-Unit_test/unit_4,Success,301.351,174.214,313.74,221.298,177.315,213.276
-Unit_test/unit_5,Success,733.219,395.678,719.025,549.678,426.906,575.449
-Unit_test/unit_6,Success,1415.24,793.166,1414.96,1112.72,817.379,1064.97
+Unit_test/unit_1,Success,1.52,0,0,0,0,0
+Unit_test/unit_2,Success,11.669,1.226,14.762,0,16.949,0
+Unit_test/unit_3,Success,47.605,24.79,42.061,27.9,26.573,26.933
+Unit_test/unit_4,Success,313.367,181.92,305.526,233.74,172.318,221.688
+Unit_test/unit_5,Success,766.094,434.498,735.294,537.163,427.31,523.757
+Unit_test/unit_6,Success,1442.21,794.605,1424.64,1113.3,808.898,1091.23
 Unit_test/unit_7,input dimension mismatch,0,0,0,0,0,0
 Unit_test/unit_8,Insufficient matix data in Unit_test/unit_8/A.txt,0,0,0,0,0,0
 Unit_test/unit_9,Insufficient matix data in Unit_test/unit_9/A.txt,0,0,0,0,0,0

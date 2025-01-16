@@ -2,7 +2,8 @@
 #include "matmul.hpp"
 using namespace std;
 
-void matrix_multiplication(double** A,int rowsA,int colsA,double** B,int rowsB,int colsB,double** result,int choice) {
+template <typename T>
+void matrix_multiplication(T** A,int rowsA,int colsA,T** B,int rowsB,int colsB,T** result,int choice){
     // result matrix with zero
     for(int i=0;i<rowsA;i++){
         for(int j=0;j<colsB;j++){
@@ -76,3 +77,5 @@ void matrix_multiplication(double** A,int rowsA,int colsA,double** B,int rowsB,i
             exit(EXIT_FAILURE);
     }
 }
+template void matrix_multiplication<double>(double** A, int rowsA, int colsA, double** B, int rowsB, int colsB, double** result, int choice);
+template void matrix_multiplication<int>(int** A, int rowsA, int colsA, int** B, int rowsB, int colsB, int** result, int choice);
