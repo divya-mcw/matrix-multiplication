@@ -53,6 +53,7 @@ void deleteMatrix(T** matrix,int rows){
 }
 
 int main(){
+    //the wanted file can be executed by using the below array
     const string test_cases[] ={
         "Unit_test/unit_1",
         "Unit_test/unit_2",
@@ -65,7 +66,8 @@ int main(){
         "Unit_test/unit_9",
         "Unit_test/unit_10",
         "Unit_test/unit_11",
-        "Unit_test/unit_12"
+        "Unit_test/unit_12",
+        "Unit_test/unit_13"
     };
 
     // Open the results CSV file and write the header

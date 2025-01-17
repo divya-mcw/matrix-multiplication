@@ -1,13 +1,14 @@
 Test Case,Status,ijk t(ms),ikj t(ms),jik t(ms),jki t(ms),kij t(ms),kji t(ms)
-Unit_test/unit_1,Success,1.52,0,0,0,0,0
-Unit_test/unit_2,Success,11.669,1.226,14.762,0,16.949,0
-Unit_test/unit_3,Success,47.605,24.79,42.061,27.9,26.573,26.933
-Unit_test/unit_4,Success,313.367,181.92,305.526,233.74,172.318,221.688
-Unit_test/unit_5,Success,766.094,434.498,735.294,537.163,427.31,523.757
-Unit_test/unit_6,Success,1442.21,794.605,1424.64,1113.3,808.898,1091.23
+Unit_test/unit_1,Success,0,0,0,0,0,0
+Unit_test/unit_2,Success,0,14.676,0,16.457,1.767,7.36
+Unit_test/unit_3,Success,24.463,17.302,31.489,8.48,20.529,25.169
+Unit_test/unit_4,Success,232.335,134.508,221.201,170.202,135.162,158.965
+Unit_test/unit_5,Success,529.057,316.16,530.062,411.31,299.793,390.048
+Unit_test/unit_6,Success,773.895,431.202,774.013,608.082,440.095,597.549
 Unit_test/unit_7,input dimension mismatch,0,0,0,0,0,0
 Unit_test/unit_8,Insufficient matix data in Unit_test/unit_8/A.txt,0,0,0,0,0,0
 Unit_test/unit_9,Insufficient matix data in Unit_test/unit_9/A.txt,0,0,0,0,0,0
 Unit_test/unit_10,No matrix dimension found in Unit_test/unit_10/B.txt,0,0,0,0,0,0
 Unit_test/unit_11,Success,0,0,0,0,0,0
 Unit_test/unit_12,No matrix dimension found in Unit_test/unit_12/A.txt,0,0,0,0,0,0
+Unit_test/unit_13,Failed,0,0,0,0,0,0
